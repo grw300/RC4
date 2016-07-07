@@ -26,11 +26,10 @@ namespace RC4
             byte[] s = Enumerable.Range(0, 1000000)
                                  .Select(b => (byte)b)
                                  .ToArray();
-            int i = 0, j = 0;
 
             bool startCheck = false;
 
-            while (true)
+            for (int i = 0, j = 0; i < 1000000; i++)
             {
                 j = (j + s[i] + key[i % key.Length]) % 256;
                 Swap(s, i, j);
@@ -41,40 +40,32 @@ namespace RC4
                         return i - position;
                 }
 
-                i++;
-
                 if (i > position)
                     startCheck = true;
-
-                if (i >= 1000000)
-                    return -1;
             }
+            return -1;
         }
 
-        public static byte[] Decrypt(byte[] key, byte[] cipher)
+        public static IEnumerable<byte> Decrypt(IEnumerable<byte> key, IEnumerable<byte> cipher)
         {
             return Encrypt(key, cipher);
         }
 
-        public static byte[] Encrypt(byte[] key, byte[] data)
+        public static IEnumerable<byte> Encrypt(IEnumerable<byte> key, IEnumerable<byte> data)
         {
-            byte[] s = KeyInitialization(key);
-
-            byte[] cipher = new byte[data.Length];
+            byte[] s = KeyInitialization(key.ToArray());
 
             int i = 0, j = 0;
 
-            for (int l = 0; l < data.Length; l++)
+            return data.Select(b =>
             {
                 i = (i + 1) % 256;
                 j = (j + s[i]) % 256;
 
                 Swap(s, i, j);
 
-                cipher[l] = (byte)(data[l] ^ s[(s[i] + s[j]) % 256]);
-            }
-
-            return cipher;
+                return (byte)(b ^ s[(s[i] + s[j]) % 256]);
+            }).ToArray();
         }
 
         private static void Swap(byte[] s, int i, int j)

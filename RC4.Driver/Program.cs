@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Linq;
 
 namespace RC4.Driver
 {
@@ -16,14 +17,14 @@ namespace RC4.Driver
             var data = Encoding.Unicode.GetBytes(dataText);
 
             var cipher = RC4.Encrypt(key, data);
-            var cipherText = Encoding.Unicode.GetString(cipher);
+            var cipherText = Encoding.Unicode.GetString(cipher.ToArray());
 
             var retrieved = RC4.Decrypt(key, cipher);
-            var retrievedText = Encoding.Unicode.GetString(retrieved);
+            var retrievedText = Encoding.Unicode.GetString(retrieved.ToArray());
 
             Console.WriteLine($"Data text     : {dataText}");
             Console.WriteLine($"Cipher text   : {cipherText}");
-            Console.WriteLine($"Cipher bytes   : {PrintByteArray(cipher)}");
+            Console.WriteLine($"Cipher bytes   : {PrintByteArray(cipher.ToArray())}");
             Console.WriteLine($"Retrieved text: {retrievedText}");
 
             Console.WriteLine($"Period of first pseudo-random byte: {RC4.GetKeyInitializationPeriod(key, 1)}");
