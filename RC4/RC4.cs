@@ -71,11 +71,7 @@ namespace RC4
 
                 Swap(s, i, j);
 
-                var t = (s[i] + s[j]) % 256;
-
-                var k = s[t];
-
-                cipher[l] = (byte)(data[l] ^ k);
+                cipher[l] = (byte)(data[l] ^ s[(s[i] + s[j]) % 256]);
             }
 
             return cipher;
