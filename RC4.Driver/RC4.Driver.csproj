@@ -1,12 +1,12 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
     <ProjectGuid>{DA0701E2-1DE1-4E5D-A930-5F0E071ACB6A}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>RC4</RootNamespace>
-    <AssemblyName>RC4</AssemblyName>
+    <RootNamespace>RC4.Driver</RootNamespace>
+    <AssemblyName>RC4.Driver</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
